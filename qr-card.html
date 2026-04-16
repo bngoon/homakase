@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homakase — QR Card</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Libre+Baskerville:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+      :root {
+        --paper: #f7f4ef;
+        --ink: #1a1a1a;
+        --muted: #6f6f6f;
+        --rule: #d6d2cb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e5e2dc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: "Libre Baskerville", serif;
+      }
+
+      .card {
+        background: var(--paper);
+        width: 280px;
+        padding: 36px 28px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .kana {
+        font-family: "Hiragino Mincho Pro", "Yu Mincho", "Noto Serif JP", "MS Mincho", serif;
+        font-size: 2rem;
+        font-weight: 400;
+        letter-spacing: 4px;
+        margin: 0 0 4px;
+      }
+
+      .roman {
+        font-family: "Playfair Display", serif;
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+        margin: 0 0 20px;
+        color: var(--muted);
+      }
+
+      .divider {
+        width: 40px;
+        height: 1px;
+        background: var(--rule);
+        margin: 0 auto 20px;
+      }
+
+      #qr-code {
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      #qr-code canvas,
+      #qr-code img {
+        display: block;
+      }
+
+      .label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      @media print {
+        body {
+          background: none;
+          min-height: unset;
+        }
+
+        .card {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <p class="kana">おまかせ</p>
+      <p class="roman">Homakase</p>
+      <div class="divider"></div>
+      <div id="qr-code"></div>
+      <p class="label">Scan to view tonight's menu</p>
+    </div>
+
+    <script>
+      new QRCode(document.getElementById("qr-code"), {
+        text: "https://homakase-two.vercel.app/",
+        width: 160,
+        height: 160,
+        colorDark: "#1a1a1a",
+        colorLight: "#f7f4ef",
+        correctLevel: QRCode.CorrectLevel.M,
+      });
+    </script>
+  </body>
+</html>

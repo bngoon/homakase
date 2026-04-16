@@ -11,10 +11,7 @@
       rel="stylesheet"
     />
 
-    <!-- QR code library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-    <style>
+<style>
       :root {
         --paper: #f7f4ef;
         --ink: #1a1a1a;
@@ -135,31 +132,7 @@
         margin-top: 24px;
       }
 
-      .qr-section {
-        text-align: center;
-        margin-top: 32px;
-        padding-top: 24px;
-        border-top: 1px solid var(--rule);
-      }
-
-      .qr-section p {
-        font-size: 0.7rem;
-        color: var(--muted);
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        margin: 0 0 12px;
-      }
-
-      #qr-code {
-        display: inline-block;
-      }
-
-      #qr-code canvas,
-      #qr-code img {
-        display: block;
-      }
-
-      @media print {
+@media print {
         body {
           background: none;
         }
@@ -216,22 +189,6 @@
       </section>
 
       <footer>Crafted with balance and restraint</footer>
-
-      <div class="qr-section">
-        <p>Scan to view menu</p>
-        <div id="qr-code"></div>
-      </div>
     </div>
-
-    <script>
-      new QRCode(document.getElementById("qr-code"), {
-        text: window.location.href,
-        width: 120,
-        height: 120,
-        colorDark: "#1a1a1a",
-        colorLight: "#f7f4ef",
-        correctLevel: QRCode.CorrectLevel.M,
-      });
-    </script>
   </body>
 </html>
