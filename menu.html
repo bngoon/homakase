@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Omakase Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Elegant serif fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- QR code library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+      :root {
+        --paper: #f7f4ef;
+        --ink: #1a1a1a;
+        --muted: #6f6f6f;
+        --rule: #d6d2cb;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e5e2dc;
+        color: var(--ink);
+        font-family: "Libre Baskerville", serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .page {
+        max-width: 680px;
+        width: 100%;
+        background: var(--paper);
+        padding: 40px 72px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      header h1.kana {
+        font-family:
+          "Hiragino Mincho Pro", "Yu Mincho", "Noto Serif JP", "MS Mincho",
+          serif;
+        font-size: 3.2rem;
+        font-weight: 400;
+        margin: 0;
+        letter-spacing: 4px;
+      }
+
+      header h2.roman {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 12px 0 6px;
+        letter-spacing: 3px;
+      }
+
+      header p {
+        margin-top: 6px;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .divider {
+        width: 60px;
+        height: 1px;
+        background: var(--rule);
+        margin: 24px auto;
+      }
+
+      section {
+        margin-bottom: 28px;
+      }
+
+      section h2 {
+        text-align: center;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+
+      .note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-bottom: 18px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        text-align: center;
+        padding: 6px 0;
+        font-size: 0.95rem;
+      }
+
+      .optional {
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-style: italic;
+        margin-left: 4px;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 1px;
+        margin-top: 24px;
+      }
+
+      .qr-section {
+        text-align: center;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--rule);
+      }
+
+      .qr-section p {
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin: 0 0 12px;
+      }
+
+      #qr-code {
+        display: inline-block;
+      }
+
+      #qr-code canvas,
+      #qr-code img {
+        display: block;
+      }
+
+      @media print {
+        body {
+          background: none;
+        }
+
+        .page {
+          box-shadow: none;
+          margin: 0;
+          max-width: none;
+          padding: 48px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <h1 class="kana">おまかせ</h1>
+        <h2>Homakase</h2>
+        <p>Chef’s Tasting</p>
+      </header>
+
+      <div class="divider"></div>
+
+      <section>
+        <h2>Starters</h2>
+        <div class="note"></div>
+        <ul>
+          <li>Miso Soup</li>
+          <li>Seaweed Salad</li>
+          <li>Truffle Hamachi Crudo</li>
+          <li>Chicken Karaage</li>
+          <!-- <li>Steamed Egg Custard</li> -->
+        </ul>
+      </section>
+
+      <section>
+        <h2>Nigiri & Rolls</h2>
+        <ul>
+          <li>Salmon Nigiri</li>
+          <li>Fatty Tuna Nigiri</li>
+          <li>Hamachi Nigiri</li>
+          <li>Spicy Tuna Hand Roll</li>
+          <!-- <li>Scallop Nigiri -->
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Beverages</h2>
+        <ul>
+          <li>Lychee Sake Martini</li>
+          <li>Sapporo</li>
+        </ul>
+      </section>
+
+      <footer>Crafted with balance and restraint</footer>
+
+      <div class="qr-section">
+        <p>Scan to view menu</p>
+        <div id="qr-code"></div>
+      </div>
+    </div>
+
+    <script>
+      new QRCode(document.getElementById("qr-code"), {
+        text: window.location.href,
+        width: 120,
+        height: 120,
+        colorDark: "#1a1a1a",
+        colorLight: "#f7f4ef",
+        correctLevel: QRCode.CorrectLevel.M,
+      });
+    </script>
+  </body>
+</html>
